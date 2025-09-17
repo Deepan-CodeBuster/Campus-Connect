@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="../static/css/admin.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, <b>{{ username }}</b></p>
+    <a href="/logout" class="btn">Logout</a>
+
+    
+
+    <!-- Posts Section -->
+    <h2>📝 Posts</h2>
+    <div class="post-grid">
+      {% if posts %}
+        {% for post in posts %}
+        <div class="post-card">
+          {% if post.image_url %}
+            <img src="{{ post.image_url }}" alt="{{ post.title }}">
+          {% else %}
+            <div class="no-image">No Image</div>
+          {% endif %}
+          <div class="post-content">
+            <h3>{{ post.title }}</h3>
+            <p><b>Crowd:</b> {{ post.crowd }}</p>
+            <p><b>Chips:</b> {{ post.chips }}</p>
+            <p>{{ post.description }}</p>
+            <div class="actions">
+              <a href="/admin/edit-post/{{ post.id }}" class="btn small">Edit</a>
+              <form action="/admin/delete-post/{{ post.id }}" method="post" style="display:inline;" onsubmit="return confirm('Delete this post?')">
+                <button type="submit" class="btn danger small">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p>No posts available</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

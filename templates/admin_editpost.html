@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post (Admin)</title>
+    <link rel="stylesheet" href="../static/css/post.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Post (Admin)</h1>
+        <form action="/admin/edit-post/{{ post.id }}" method="post">
+            <label for="title">Title:</label>
+            <input type="text" name="title" value="{{ post.title }}" required>
+
+            <label for="description">Description:</label>
+            <textarea name="description">{{ post.description }}</textarea>
+
+            <label for="crowd">Crowd:</label>
+            <select name="crowd">
+                <option value="More Crowd" {% if post.crowd == 'More Crowd' %}selected{% endif %}>More Crowd</option>
+                <option value="Medium Crowd" {% if post.crowd == 'Medium Crowd' %}selected{% endif %}>Medium Crowd</option>
+                <option value="Less Crowd" {% if post.crowd == 'Less Crowd' %}selected{% endif %}>Less Crowd</option>
+            </select>
+
+            <label for="chips">Chips:</label>
+            <input type="text" name="chips" value="{{ post.chips }}">
+
+            <label for="queue">Queue (Time):</label>
+            <input type="text" name="queue" value="{{ post.queue_time }}">
+
+            <button type="submit" class="btn">Update Post</button>
+        </form>
+    </div>
+</body>
+</html>

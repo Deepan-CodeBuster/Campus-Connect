@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Posts</title>
+  <link rel="stylesheet" href="../static/css/posts.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Posts</h1>
+    <a href="/profile/post" class="btn">+ Create New Post</a>
+    <a href="/logout" class="btn danger">Logout</a>
+
+    <div class="post-grid">
+  {% for post in posts %}
+  <div class="post-card">
+    {% if post.image_url %}
+      <img src="{{ post.image_url }}" alt="{{ post.title }}">
+    {% else %}
+      <div class="no-image">No Image</div>
+    {% endif %}
+    <div class="post-content">
+      <h3>{{ post.title }}</h3>
+      <p><b>Crowd:</b> {{ post.crowd }}</p>
+      <p><b>Chips:</b> {{ post.chips }}</p>
+      <p><b>Queue:</b> {{ post.queue_time }}</p>
+      <p>{{ post.description }}</p>
+
+      <!-- Like Button -->
+      <form action="/posts/{{ post.id }}/like" method="post">
+        <button type="submit" class="btn small">❤️ Like ({{ likes.get(post.id, 0) }})</button>
+      </form>
+
+      <!-- Comments -->
+      <div class="comments">
+        <h4>Comments</h4>
+        {% if comments.get(post.id) %}
+          <ul>
+            {% for c in comments[post.id] %}
+              <li>{{ c.content }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No comments yet</p>
+        {% endif %}
+      </div>
+
+      <!-- Add Comment -->
+      <form action="/posts/{{ post.id }}/comment" method="post" class="comment-form">
+        <input type="text" name="content" placeholder="Write a comment..." required>
+        <button type="submit" class="btn small">Post</button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.egg-info/
+*.egg
+*.log
+
+# Virtual environment
+.env
+.venv/
+venv/
+ENV/
+
+# Environment variables
+*.env
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Byte-compiled
+*.db
+*.sqlite3
+
+# Node/npm (if you use npm for frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build / cache
+dist/
+build/
+*.spec
+
+# Flask specific
+instance/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db

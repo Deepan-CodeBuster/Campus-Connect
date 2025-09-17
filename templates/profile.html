@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - CampusConnect</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-header">
+            <div class="logo">
+                <i class="fas fa-user"></i>
+            </div>
+            <h1>Welcome, <b>{{ username }}</b>!</h1>
+            <p class="welcome-text">Manage your posts and account details here.</p>
+        </div>
+
+        <a href="/profile/post" class="btn">+ Create New Post</a>
+        <a href="/logout" class="btn" style="margin-top:10px;">Logout</a>
+
+        <h2>My Posts</h2>
+        {% if posts %}
+            <ul class="post-list">
+                {% for post in posts %}
+                <li class="post-card">
+                    <h3>{{ post.title }}</h3>
+                    {% if post.image_url %}
+                        <img src="{{ post.image_url }}" alt="Post Image">
+                    {% endif %}
+                    <p>{{ post.description }}</p>
+                    <p><b>Crowd:</b> {{ post.crowd }}</p>
+                    <p><b>Chips:</b> {{ post.chips }}</p>
+                    <p><b>Queue:</b> {{ post.queue_time }}</p>
+                    <a href="/profile/editpost/{{ post.id }}" class="btn small">View / Edit</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No posts yet. Create your first one!</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Smooth scroll and entrance animations
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
