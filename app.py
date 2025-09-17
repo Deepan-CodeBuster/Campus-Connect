@@ -293,4 +293,5 @@ def comment_post(post_id):
     return redirect(url_for("view_posts"))
 
 
-
+if __name__ == '__main__':
+    app.run(debug=True)
